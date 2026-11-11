@@ -26,22 +26,22 @@ public class Character
     public void Update()
     {
         // Up
-        if (Input.IsKeyboardKeyPressed(KeyboardKey.W))
+        if (Input.IsKeyboardKeyPressed(KeyboardKey.W) || Input.IsKeyboardKeyPressed(KeyboardKey.Up))
         {
             currentAnimation = animUp;
         }
         // Down
-        if (Input.IsKeyboardKeyPressed(KeyboardKey.S))
+        if (Input.IsKeyboardKeyPressed(KeyboardKey.S) || Input.IsKeyboardKeyPressed(KeyboardKey.Down))
         {
             currentAnimation = animDown;
         }
         // Left
-        if (Input.IsKeyboardKeyPressed(KeyboardKey.A))
+        if (Input.IsKeyboardKeyPressed(KeyboardKey.A) || Input.IsKeyboardKeyPressed(KeyboardKey.Left))
         {
             currentAnimation = animLeft;
         }
         // Right
-        if (Input.IsKeyboardKeyPressed(KeyboardKey.D))
+        if (Input.IsKeyboardKeyPressed(KeyboardKey.D) || Input.IsKeyboardKeyPressed(KeyboardKey.Right))
         {
             currentAnimation = animRight;
         }
