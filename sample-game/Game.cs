@@ -10,21 +10,24 @@ namespace MohawkGame2D;
 /// </summary>
 public class Game
 {
-    Character character = new Character();
+    Character characterM = new Character();
+    Character characterF = new Character();
 
     public void Setup()
     {
         Window.SetTitle("Cool Game with Assets");
         Window.SetSize(600, 600);
 
-        character.Setup();
+        characterM.Setup(0, KeyboardKey.W, KeyboardKey.S, KeyboardKey.A, KeyboardKey.D, 0);
+        characterF.Setup(2, KeyboardKey.Up, KeyboardKey.Down, KeyboardKey.Left, KeyboardKey.Right, 1);
     }
 
     public void Update()
     {
         Window.ClearBackground(Color.OffWhite);
 
-        character.Update();
+        characterM.Update();
+        characterF.Update();
 
         Text.Size = 32;
         Text.Color = Color.Black;

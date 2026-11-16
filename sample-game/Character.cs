@@ -13,27 +13,44 @@ public class Character
     float speed;
     float timeElapsedSinceLastFrame;
 
+    // Character inputs
+    KeyboardKey up;
+    KeyboardKey down;
+    KeyboardKey left;
+    KeyboardKey right;
+    int controllerID;
+
+
     // Game data
     // Frame counts
     int[] animDown = [1, 0, 1, 2];
     int[] animUp = [4, 3, 4, 5];
-    int[] animLeft = [6, 7];
-    int[] animRight = [8, 9];
+    int[] animLeft = [6, 7, 6, 7];
+    int[] animRight = [8, 9, 8, 9];
     // Size
     const int width = 16;
     const int height = 16;
     const float secondsPerFrame = 0.100f;
 
-    public void Setup()
+    public void Setup(int spritesheetRow, KeyboardKey u, KeyboardKey d, KeyboardKey l, KeyboardKey r, int controllerID)
     {
         // Initialize which animation to use
         currentAnimation = animDown;
+        // Pick which character to display from spritesheet
+        characterRow = spritesheetRow;
 
         // Set up initial variables
         speed = 16 * 4 * 4;
 
         // TEMP
         position = Window.Size / 2;
+
+        // Set character inputs
+        up = u;
+        down = d;
+        left = l;
+        right = r;
+        this.controllerID = controllerID;
     }
 
     public void Update()
@@ -43,34 +60,29 @@ public class Character
         // used to know if we update animation frame
         bool hasMoved = false;
 
-        bool temp = Input.IsControllerButtonDown(0, ControllerButton.LeftFaceLeft);
-        Console.WriteLine(temp);
-
         // Up
-        if (Input.IsKeyboardKeyDown(KeyboardKey.W) ||
-            Input.IsKeyboardKeyDown(KeyboardKey.Up) ||
-            Input.IsControllerButtonDown(0, ControllerButton.LeftFaceLeft))
+        if (Input.IsKeyboardKeyDown(up) || Input.IsControllerButtonDown(controllerID, ControllerButton.LeftFaceUp))
         {
             currentAnimation = animUp;
             position.Y -= speed * Time.DeltaTime;
             hasMoved = true;
         }
         // Down
-        if (Input.IsKeyboardKeyDown(KeyboardKey.S) || Input.IsKeyboardKeyDown(KeyboardKey.Down))
+        if (Input.IsKeyboardKeyDown(down) || Input.IsControllerButtonDown(controllerID, ControllerButton.LeftFaceDown))
         {
             currentAnimation = animDown;
             position.Y += speed * Time.DeltaTime;
             hasMoved = true;
         }
         // Left
-        if (Input.IsKeyboardKeyDown(KeyboardKey.A) || Input.IsKeyboardKeyDown(KeyboardKey.Left))
+        if (Input.IsKeyboardKeyDown(left) || Input.IsControllerButtonDown(controllerID, ControllerButton.LeftFaceLeft))
         {
             currentAnimation = animLeft;
             position.X -= speed * Time.DeltaTime;
             hasMoved = true;
         }
         // Right
-        if (Input.IsKeyboardKeyDown(KeyboardKey.D) || Input.IsKeyboardKeyDown(KeyboardKey.Right))
+        if (Input.IsKeyboardKeyDown(right) || Input.IsControllerButtonDown(controllerID, ControllerButton.LeftFaceRight))
         {
             currentAnimation = animRight;
             position.X += speed * Time.DeltaTime;
